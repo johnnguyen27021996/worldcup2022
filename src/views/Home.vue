@@ -14,7 +14,7 @@
             moment(match.datetime).format('DD/MM/YYYY'),
         }"
       >
-        Vòng đấu bảng - {{ moment(match.datetime).format("ddd, DD/MM") }}
+        Vòng đấu bảng · {{ moment(match.datetime).format("ddd, DD/MM") }}
       </div>
       <div class="scheduled-day">
         <template v-for="mat in match.data" :key="mat.id">
@@ -152,6 +152,7 @@ export default {
   margin-top: 10px;
   margin-bottom: 40px;
   .w-scheduled {
+    background-color: #fafafa;
     &:last-child {
       border-bottom: solid 1px #ebebeb;
     }

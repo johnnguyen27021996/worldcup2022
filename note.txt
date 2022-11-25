@@ -1,0 +1,35 @@
+get all matches: 
+`https://api.fifa.com/api/v3/calendar/matches?from=2022-11-19T00%3A00%3A00Z&to=2022-12-31T23%3A59%3A59Z&language=en&count=500&idCompetition=17`
+
+
+
+live match
+`https://api.fifa.com/api/v3/live/football/17/255711/285063=IdStage/400128082=IdMatch`
+
+
+
+static match
+`https://fdh-api.fifa.com/v1/stats/match/128084=Properties.IdIFES/teams.json`
+
+const fifaStatsKeyDictionary: {
+  [k: string]: keyof MatchStats;
+} = {
+  TotalDistance: 'distanceCovered',
+  AttemptAtGoalInsideThePenaltyArea: 'kicksOnWoodwork',
+  AttemptAtGoalOnTarget: 'kicksOnTarget',
+  AttemptAtGoalOffTarget: 'kicksOffTarget',
+  AttemptAtGoalBlocked: 'kicksBlocked',
+  AttemptAtGoal: 'attemptsOnGoal',
+  Corners: 'corners',
+  Offsides: 'offsides',
+  Passes: 'passes',
+  RedCards: 'redCards',
+  YellowCards: 'yellowCards',
+  PassesCompleted: 'passesCompleted',
+  FreeKicks: 'freeKicks',
+  Crosses: 'crosses',
+  CrossesCompleted: 'crossesCompleted',
+  Assists: 'assists',
+  FoulsFor: 'foulsReceived',
+  FoulsAgainst: 'foulsCommited',
+};

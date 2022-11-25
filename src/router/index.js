@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "@/views/Home.vue";
 import Group from "@/views/Group.vue";
+import DetailMatch from "@/views/DetailMatch.vue";
 
 const routes = [
   {
@@ -17,6 +18,14 @@ const routes = [
     name: "groups",
     meta: {
       title: "Bảng xếp hạng",
+    },
+  },
+  {
+    path: "/match/:id",
+    component: DetailMatch,
+    name: "match",
+    meta: {
+      title: "Trận đấu",
     },
   },
 ];

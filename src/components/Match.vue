@@ -1,5 +1,5 @@
 <template>
-  <div class="w-match">
+  <div class="w-match" @click="onClickMatch">
     <div class="group-name">Bảng {{ group }}</div>
     <div class="detail-match" v-if="match">
       <div class="teams">
@@ -60,12 +60,14 @@ import { toRefs } from "@vue/reactivity";
 import { computed } from "@vue/runtime-core";
 import { useStore } from "vuex";
 import moment from "moment";
+import { useRouter } from "vue-router";
 export default {
   name: "Match",
   props: {
     match: [Object, Array],
   },
   setup(props) {
+    const router = useRouter();
     const store = useStore();
     const status = computed(() => store.state.matchStatus.matchStatus);
     const teams = computed(() => store.state.teams.teams);
@@ -82,7 +84,10 @@ export default {
           (team) => team.country === match.value.home_team.country
         )[0].group_letter
     );
-    return { status, match, flagHome, flagAway, moment, group };
+    const onClickMatch = () => {
+      router.push("/match/" + match.value.id);
+    };
+    return { status, match, flagHome, flagAway, moment, group, onClickMatch };
   },
 };
 </script>
