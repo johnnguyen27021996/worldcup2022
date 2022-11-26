@@ -2,9 +2,9 @@
   <div class="w-detail-match" v-if="match">
     <div class="detail-status">
       <template v-if="statusMatch === 'completed'">Kết thúc</template>
-      <template v-else-if="statusMatch === 'in_progress'">{{
-        match.time
-      }}</template>
+      <template v-else-if="statusMatch === 'in_progress'"
+        ><div class="in_progress-match">{{ match.time }}</div>
+      </template>
       <template v-else>Sắp diễn ra</template>
     </div>
     <div class="detail-team">
@@ -150,7 +150,49 @@
         </div>
       </div>
     </div>
-    <div class="statistical" v-show="activeTab === 'third'">
+    <div
+      class="squad"
+      v-if="
+        activeTab === 'second' &&
+        awayPlayers.length > 0 &&
+        homePlayers.length > 0
+      "
+    >
+      <Tactics
+        :isHomeTeam="true"
+        :name="match.homeTeam.name"
+        :flags="flagHome"
+        :tactics="match.homeTeam.statistics.tactics"
+        :players="homePlayers"
+      ></Tactics>
+      <Tactics
+        :name="match.awayTeam.name"
+        :flags="flagAway"
+        :tactics="match.awayTeam.statistics.tactics"
+        :players="awayPlayers"
+      ></Tactics>
+    </div>
+    <div
+      class="main-action"
+      v-if="
+        statusMatch !== 'completed' &&
+        statusMatch !== 'in_progress' &&
+        activeTab === 'third'
+      "
+    >
+      <div class="start">
+        <img src="@/assets/stopwatch_icon.svg" alt="" />
+        <div>BẮT ĐẦU</div>
+        <div class="time">{{ moment(match.date).format("HH:mm") }}</div>
+      </div>
+    </div>
+    <div
+      class="statistical"
+      v-show="
+        (statusMatch === 'completed' || statusMatch === 'in_progress') &&
+        activeTab === 'third'
+      "
+    >
       <div class="statistical-item">
         <div><img :src="flagHome" alt="" /></div>
         <div>TEAM STATS</div>
@@ -217,9 +259,11 @@ import { ref } from "@vue/reactivity";
 import { computed } from "@vue/runtime-core";
 import { useStore } from "vuex";
 import moment from "moment";
+import Tactics from "@/components/Tactics.vue";
 
 export default {
   name: "detail-match",
+  components: { Tactics },
   setup() {
     const store = useStore();
     const teams = computed(() => store.state.teams.teams);
@@ -476,7 +520,7 @@ export default {
   }
   .main-action {
     margin-top: 10px;
-    padding: 80px;
+    padding: 20px 80px;
     .start {
       display: flex;
       align-items: center;
@@ -541,6 +585,9 @@ export default {
       }
     }
   }
+  .squad {
+    padding: 20px 80px;
+  }
   .statistical {
     padding: 4px 16px 20px;
     margin: 8px 8px;
@@ -564,6 +611,42 @@ export default {
         }
       }
     }
+  }
+}
+.in_progress-match {
+  width: 30px;
+  text-align: center;
+  position: relative;
+  color: #1e8e3e;
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::before {
+    position: absolute;
+    content: "";
+    background: #1e8e3e;
+    width: 7px;
+    height: 2px;
+    left: 0;
+    bottom: 0px;
+    transform: translateX(-10px);
+    animation-name: moved;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+  }
+}
+@keyframes moved {
+  0% {
+    transform: translateX(-10px);
+  }
+  50% {
+    transform: translateX(35px);
+  }
+  100% {
+    transform: translateX(-10px);
   }
 }
 </style>
