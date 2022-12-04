@@ -2,10 +2,13 @@
   <nav class="w-navbar">
     <div class="m-navbar">
       <div class="i-navbar" @click="$router.push('/').catch(() => {})">
-        Lịch thi đấu
+        Vòng bảng
       </div>
       <div class="i-navbar" @click="$router.push('/groups').catch(() => {})">
         Bảng xếp hạng
+      </div>
+      <div class="i-navbar" @click="$router.push('/knockout').catch(() => {})">
+        Knockout
       </div>
     </div>
   </nav>
