@@ -7,11 +7,15 @@ import Knockout from "@/views/Knockout.vue";
 const routes = [
   {
     path: "/",
-    component: Home,
     name: "home",
     redirect: { name: "knockout" },
+  },
+  {
+    path: "/groups-stage",
+    component: Home,
+    name: "groups-stage",
     meta: {
-      title: "Trang chủ",
+      title: "Vòng bảng",
     },
   },
   {
