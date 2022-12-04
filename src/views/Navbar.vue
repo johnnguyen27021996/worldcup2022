@@ -1,7 +1,10 @@
 <template>
   <nav class="w-navbar">
     <div class="m-navbar">
-      <div class="i-navbar" @click="$router.push('/').catch(() => {})">
+      <div
+        class="i-navbar"
+        @click="$router.push('/groups-stage').catch(() => {})"
+      >
         Vòng bảng
       </div>
       <div class="i-navbar" @click="$router.push('/groups').catch(() => {})">
