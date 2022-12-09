@@ -45,7 +45,7 @@
     <div class="item">
       <div class="title">Vòng tứ kết</div>
       <template v-for="match in matches['quarter-final']" :key="match.id">
-        <div class="detail">
+        <div class="detail" @click="getDetailMatch(match)">
           <div
             style="width: 752px; text-align: center"
             v-if="!match.home_team_country && !match.away_team_country"
@@ -100,7 +100,7 @@
     <div class="item">
       <div class="title">Vòng bán kết</div>
       <template v-for="match in matches['semi-final']" :key="match.id">
-        <div class="detail">
+        <div class="detail" @click="getDetailMatch(match)">
           <div
             style="width: 752px; text-align: center"
             v-if="!match.home_team_country && !match.away_team_country"
@@ -158,7 +158,7 @@
         v-for="match in matches['play-off_for_third_place']"
         :key="match.id"
       >
-        <div class="detail">
+        <div class="detail" @click="getDetailMatch(match)">
           <div
             style="width: 752px; text-align: center"
             v-if="!match.home_team_country && !match.away_team_country"
@@ -213,7 +213,7 @@
     <div class="item">
       <div class="title">Chung kết</div>
       <template v-for="match in matches['final']" :key="match.id">
-        <div class="detail">
+        <div class="detail" @click="getDetailMatch(match)">
           <div
             style="width: 752px; text-align: center"
             v-if="!match.home_team_country && !match.away_team_country"
